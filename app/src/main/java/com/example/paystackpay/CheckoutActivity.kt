@@ -24,10 +24,6 @@ class CheckoutActivity : AppCompatActivity() {
     private lateinit var binding: ActivityCheckoutBinding
 
 
-    private val handler: Handler by lazy {
-        Handler(Looper.getMainLooper())
-    }
-
 
     @SuppressLint("MissingInflatedId")
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -66,7 +62,7 @@ class CheckoutActivity : AppCompatActivity() {
                         withContext(Dispatchers.Main){
                             val url = response.body()?.data?.authorization_url?.toString()
                             showToast(url.toString())
-                            Log.d(NogatWebViewActivity, "successful response: ${url.toString()}}")
+                            Log.d(NogatWebViewActivity, "authorizationUrl: ${url.toString()}}")
                             loadCheckout(url.toString() + "")
                         }
 
@@ -105,7 +101,7 @@ class CheckoutActivity : AppCompatActivity() {
 
     override fun onDestroy() {
         super.onDestroy()
-        handler.removeCallbacksAndMessages(null)
+
     }
 
 }
