@@ -15,6 +15,7 @@ import com.google.gson.Gson
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 import retrofit2.Response
 
 class CheckoutActivity : AppCompatActivity() {
@@ -35,9 +36,8 @@ class CheckoutActivity : AppCompatActivity() {
         binding = ActivityCheckoutBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        handler.postDelayed(Runnable {
-            makePostRequet()
-        }, 3000)
+        makePostRequet()
+
 
     }
 
@@ -58,35 +58,25 @@ class CheckoutActivity : AppCompatActivity() {
 
 
                 if (response.isSuccessful) {
-                    Log.d(NogatWebViewActivity, "successful response: ${Gson().toJson(response)}")
 
                     val authorizationUrl = response.body()?.data?.authorization_url
 
                     if (!authorizationUrl.isNullOrEmpty()) {
 
-                        // Handle the authorization URL here, e.g., open a WebView with this URL
-                        // Example: openWebView(authorizationUrl)
-                        // You can also store the access code and reference for future use.
-
-                        val url = response.body()?.data?.authorization_url?.toString()
-
-                        // i internationally delay ot for few seconds
-                        handler.postDelayed(Runnable {
-                            loadCheckout(url.toString() + "")
+                        withContext(Dispatchers.Main){
+                            val url = response.body()?.data?.authorization_url?.toString()
                             showToast(url.toString())
-                        }, 2000)
+                            Log.d(NogatWebViewActivity, "successful response: ${url.toString()}}")
+                            loadCheckout(url.toString() + "")
+                        }
 
-
-                    } else {
-                        showToast("Authorization URL not found")
                     }
 
-                } else {
-                    Log.d(NogatWebViewActivity, "failed response: ${response.code()}")
-                    showToast("failed response: ${response.code()}")
                 }
             } catch (e: Exception) {
-                Log.d(NogatWebViewActivity, "Request failed: ${e.message}")
+                withContext(Dispatchers.Main){
+                    Log.d(NogatWebViewActivity, "Request failed: ${e.message}")
+                }
             }
         }
     }
