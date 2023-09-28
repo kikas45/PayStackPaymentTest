@@ -7,55 +7,42 @@
     android:background="@color/cod_gray_900"
     tools:context=".MainActivity">
 
-    <ImageView
-        android:id="@+id/iv_meal_image"
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/image_height"
-        android:contentDescription="@string/meal_name"
-        android:scaleType="centerCrop"
-        android:src="@drawable/ic_launcher_background"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
     <TextView
-        android:id="@+id/iv_meal_name"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="20dp"
-        android:layout_marginTop="@dimen/dimen_20"
-        android:layout_marginEnd="@dimen/dimen_20"
-        android:text="@string/meal_name"
-        android:textColor="@color/azac_500"
-        android:textSize="@dimen/text_24"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/iv_meal_image" />
-
-    <TextView
-        android:id="@+id/iv_meal_description"
+        android:id="@+id/displayResult"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/dimen_10"
-        android:layout_marginStart="@dimen/dimen_20"
-        android:layout_marginEnd="@dimen/dimen_20"
-        android:text="@string/meal_description"
+        android:text="Display Payment Deatils"
         android:textColor="@color/white"
-        android:textSize="@dimen/text_14"
-        android:lineSpacingMultiplier="1.2"
+        android:textSize="23sp"
+        android:gravity="center"
+        app:layout_constraintBottom_toTopOf="@+id/btnTapForPaymentResult"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/iv_meal_name" />
+        app:layout_constraintTop_toTopOf="parent"
+        tools:ignore="HardcodedText" />
+
+    <Button
+        android:id="@+id/btnTapForPaymentResult"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="24dp"
+        android:text="@string/meal_name"
+        android:backgroundTint="@color/azac_500"
+        android:textColor="@color/cod_gray_900"
+        android:textSize="@dimen/text_24"
+        app:layout_constraintBottom_toTopOf="@+id/btn_checkout"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
 
     <Button
         android:id="@+id/btn_checkout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/dimen_20"
-        android:layout_marginEnd="@dimen/dimen_20"
-        android:layout_marginBottom="@dimen/dimen_20"
+        android:layout_marginBottom="24dp"
         android:backgroundTint="@color/azac_500"
-        android:textColor="@color/cod_gray_900"
         android:text="@string/meal_price"
+        android:textColor="@color/cod_gray_900"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
