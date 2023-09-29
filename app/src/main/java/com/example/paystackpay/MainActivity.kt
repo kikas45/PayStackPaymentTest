@@ -72,8 +72,8 @@ class MainActivity : AppCompatActivity() {
 
             try {
                 // let just assume we passing real data to the server
-                val email = "customer@email.com"
-                val amount = "4000"
+                val email = "solo1759@yahoo.com"
+                val amount = "10000.00"
 
                 val initializeRequest = InitializeCustomerTransactionRequest(email, amount)
 
