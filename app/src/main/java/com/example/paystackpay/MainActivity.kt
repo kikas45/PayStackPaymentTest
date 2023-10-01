@@ -73,7 +73,7 @@ class MainActivity : AppCompatActivity() {
             try {
                 // let just assume we passing real data to the server
                 val email = "solo1759@yahoo.com"
-                val amount = "10000.00"
+                val amount = "40000.00"
 
                 val initializeRequest = InitializeCustomerTransactionRequest(email, amount)
 
@@ -88,9 +88,10 @@ class MainActivity : AppCompatActivity() {
                     val editor = sharedPref.edit()
                     if (!authorizationUrl.isNullOrEmpty()) {
 
-                        val reference = response.body()?.data?.reference?.toString()
-                        editor.putString(Constants.Ref_Code, reference)
-                        editor.putString(Constants.AuthorizedBearer, reference)
+                        val referenceId = response.body()?.data?.reference?.toString()
+                        Log.d("referenceId", "referenceID: ${referenceId.toString()}")
+                        editor.putString(Constants.Ref_Code, referenceId)
+                        editor.putString(Constants.AuthorizedBearer, referenceId)
                         editor.apply()
 
                         withContext(Dispatchers.Main) {
@@ -147,10 +148,17 @@ class MainActivity : AppCompatActivity() {
 
             try {
 
-                val getReference_ID = sharedPref.getString(Constants.Ref_Code, "")
-                val AuthorizedBearer = sharedPref.getString(Constants.AuthorizedBearer, "")
+                // val getReference_ID = sharedPref.getString(Constants.Ref_Code, "")
+                // val AuthorizedBearer = sharedPref.getString(Constants.AuthorizedBearer, "")
 
-                val response = RetrofitInstanceVerify.api.getTransaction(getReference_ID.toString())
+
+                // this id was generated
+                // val referenceID ="9l179w327b"
+                //  val referenceID ="dpuiyagvwm"
+                val referenceID = "1scp04zas5"
+
+
+                val response = RetrofitInstanceVerify.api.getTransaction(referenceID)
                 Log.d("PaymentVerification", "Response code: ${response.code()}")
                 //  showToast(" ${response.code()}")
 
@@ -164,13 +172,15 @@ class MainActivity : AppCompatActivity() {
 
                             binding.apply {
 
-                                val status  = response.body()?.status?.toString()
+                                val status = response.body()?.status?.toString()
                                 val authorization = response.body()?.authorization?.toString()
                                 val ammount = response.body()?.amount?.toString()
                                 val requestammount = response.body()?.requested_amount?.toString()
-                                val pos_transaction_data = response.body()?.pos_transaction_data?.toString()
+                                val pos_transaction_data =
+                                    response.body()?.pos_transaction_data?.toString()
 
-                                displayResult.text = " $status   $authorization  $ammount  $requestammount  $pos_transaction_data"
+                                displayResult.text =
+                                    " $status   $authorization  $ammount  $requestammount  $pos_transaction_data"
                             }
 
                         }
@@ -178,8 +188,7 @@ class MainActivity : AppCompatActivity() {
                         showToast("No amount")
                     }
 
-                }
-                else {
+                } else {
                     showToast("error , it is empty")
                 }
             } catch (e: Exception) {
@@ -189,7 +198,6 @@ class MainActivity : AppCompatActivity() {
             }
         }
     }
-
 
 
     override fun onDestroy() {

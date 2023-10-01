@@ -10,5 +10,12 @@ class Constants {
         const val REFERENCE_SHARED_PREF = "REFERENCE_SHARED_PREF"
         const val Ref_Code = "Reference_Code_Post_Request"
         const val AuthorizedBearer = "AuthorizedBearer"
+
+
+        // you can use any of these reference id to check
+
+//        const val referenceId = "9l179w327b"
+//        const val referenceId = "dpuiyagvwm"
+//        const val referenceId = "1scp04zas5"
     }
 }
